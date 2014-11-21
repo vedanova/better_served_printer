@@ -16,3 +16,9 @@ test/tmp
 test/version_tmp
 tmp
 .idea
+config/settings.yml
+.rvmrc
+.ruby-version
+.ruby-gemset
+dev/
+log/

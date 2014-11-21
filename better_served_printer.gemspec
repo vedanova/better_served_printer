@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = BetterServedPrinter::VERSION
   spec.authors       = ["Christoph Klocker"]
   spec.email         = ["christoph@vedanova.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Connects to the BetterServed Web Service}
+  spec.description   =
+  spec.homepage      = "http://better-served.com"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -20,4 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "debugger"
+  spec.add_development_dependency "rspec", "~> 3.1"
+
+  spec.add_runtime_dependency "pusher-client", ['>= 0.5.0']
 end

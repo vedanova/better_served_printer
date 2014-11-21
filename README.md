@@ -2,6 +2,26 @@
 
 TODO: Write a gem description
 
+## Configuration
+
+    require 'betters_served_printer'
+
+    # configuration
+    BetterServedPrinter.configure api_key: 'API_KEY', account: 'ZYT'
+    BetterServedPrinter.configure 'path/to/configuration.yml'
+
+    printer = BetterServedPrinter::Printer.new
+    printer.connect
+
+
+## Sending a test message
+
+    require 'pusher'
+    Pusher.url = "http://KEY:SECRET@api.pusherapp.com/apps/APP_ID"
+    message ="Hello World"
+
+    Pusher['private_[ACCOUNT]_notifications'].trigger('message', { message: message })
+
 ## Installation
 
 Add this line to your application's Gemfile:
