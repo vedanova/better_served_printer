@@ -46,4 +46,17 @@ namespace :debian do
   task :generate_md5sums do
     sh "cd deb_pkg && find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums"
   end
+
+  task :build_pkg do
+    Rake::Task["debian:generate_md5sums"].invoke
+    sh "sed -i 's/Version: .*/Version: #{BetterServedPrinter::VERSION}/g' deb_pkg/DEBIAN/control"
+    sh "sed -i 's/0.0.1.gem/#{BetterServedPrinter::VERSION}.gem/g' deb_pkg/DEBIAN/preinst"
+    sh "cp -f bin/better_served_printer deb_pkg/usr/local/bin"
+    sh "dpkg -b deb_pkg pkg/better-served-printer_#{BetterServedPrinter::VERSION}_all.deb"
+  end
+
+  task :build_and_copy do
+    Rake::Task["debian:build_pkg"].invoke
+    sh "scp pkg/better-served-printer_#{BetterServedPrinter::VERSION}_all.deb  pi@192.168.1.7:/home/pi"
+  end
 end

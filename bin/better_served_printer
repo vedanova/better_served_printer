@@ -2,14 +2,14 @@
 require 'daemons'
 require 'better_served_printer'
 begin
-  settings = YAML.load_file('/etc/better-served-printer/better_served_printer.yml')
+  settings = YAML.load_file('/etc/better_served_printer/better_served_printer.yml')
 rescue Errno::ENOENT
-  puts "ERROR: Configuration file not found in '/etc/better-served-printer/better_served_printer.yml'"
+  puts "ERROR: Configuration file not found in '/etc/better_served_printer/better_served_printer.yml'"
   exit
 end
 
 if settings['account'].nil? || settings['api_key'].nil? ||  settings['account'] == 'API-KEY' || settings['account'] == 'xyz'
-  puts "ERROR: Please update your account and api key in '/etc/better-served-printer/better_served_printer.yml'"
+  puts "ERROR: Please update your account and api key in '/etc/better_served_printer/better_served_printer.yml'"
   exit
 end
 
