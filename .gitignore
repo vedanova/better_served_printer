@@ -22,3 +22,5 @@ config/settings.yml
 .ruby-gemset
 dev/
 log/
+tmp
+*.deb

@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'daemons'
+require 'better_served_printer'
+
+Daemons.run_proc('better_served_printer') do
+  BetterServedPrinter.configure api_key: 'fad5ae28dbb7ec8973d5', account: '6fbe7751-0ebb-4cea-83d5-e7580c7afd37'
+  printer = BetterServedPrinter::Printer.new
+  printer.connect
+  loop do
+    sleep 10
+  end
+end

@@ -37,7 +37,7 @@ module BetterServedPrinter
 
   def self.logger
     @logger ||= begin
-      log = Logger.new(File.join(File.dirname(__FILE__), "../log/better_served_printer.log"), 10, 1024000)
+      log = Logger.new("/tmp/better_served_printer.log", 10, 1024000)
       log.level = Logger::DEBUG
       log
     end

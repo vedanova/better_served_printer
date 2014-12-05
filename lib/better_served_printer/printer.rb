@@ -29,7 +29,7 @@ module BetterServedPrinter
     end
 
     def print_raw(msg)
-      File.open(@port, 'wb') do |p|
+      File.open(get_port, 'wb') do |p|
         p.write(msg); p.flush
       end
     end
@@ -38,6 +38,8 @@ module BetterServedPrinter
 
     def get_port
       @port ||= case
+                  when File.exist?("/dev/usb/lp0")
+                    "/dev/usb/lp0"
                   when File.exist?("/dev/usb/lp1")
                     "/dev/usb/lp1"
                   when File.exist?("/dev/usb/lp2")
@@ -47,9 +49,10 @@ module BetterServedPrinter
                   when File.exist?("/dev/usb/lp4")
                     "/dev/usb/lp4"
                   else
-                    "LPT1:"
+                    nil
                 end
       @logger.info "Printing to port #{@port}"
+      @port
     end
 
     def setup_printer
