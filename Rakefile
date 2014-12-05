@@ -41,3 +41,9 @@ task :package_dependencies do
   sh "rm -f tmp/gems/cache/better_served_printer-#{BetterServedPrinter::VERSION}.gem"
   sh "find tmp/gems/cache -name '*.gem' | xargs -rn1 fpm -s gem -t deb -a all"
 end
+
+namespace :debian do
+  task :generate_md5sums do
+    sh "cd deb_pkg && find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums"
+  end
+end

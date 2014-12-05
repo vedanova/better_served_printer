@@ -1,8 +1,21 @@
 #!/usr/bin/env ruby
 require 'daemons'
 require 'better_served_printer'
+begin
+  settings = YAML.load_file('/etc/better-served-printer/better_served_printer.yml')
+rescue Errno::ENOENT
+  puts "ERROR: Configuration file not found in '/etc/better-served-printer/better_served_printer.yml'"
+  exit
+end
+
+if settings['account'].nil? || settings['api_key'].nil? ||  settings['account'] == 'API-KEY' || settings['account'] == 'xyz'
+  puts "ERROR: Please update your account and api key in '/etc/better-served-printer/better_served_printer.yml'"
+  exit
+end
+
 
 Daemons.run_proc('better_served_printer') do
+BetterServedPrinter.configure api_key: settings[:api_key], account: settings[:account]
   BetterServedPrinter.configure api_key: 'fad5ae28dbb7ec8973d5', account: '6fbe7751-0ebb-4cea-83d5-e7580c7afd37'
   printer = BetterServedPrinter::Printer.new
   printer.connect
