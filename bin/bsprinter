@@ -14,7 +14,7 @@ if settings['account'].nil? || settings['api_key'].nil? ||  settings['account'] 
 end
 
 
-Daemons.run_proc('better_served_printer') do
+Daemons.run_proc('bsprinter') do
 BetterServedPrinter.configure api_key: settings[:api_key], account: settings[:account]
   BetterServedPrinter.configure api_key: 'fad5ae28dbb7ec8973d5', account: '6fbe7751-0ebb-4cea-83d5-e7580c7afd37'
   printer = BetterServedPrinter::Printer.new

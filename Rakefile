@@ -48,10 +48,11 @@ namespace :debian do
   end
 
   task :build_pkg do
+    sh "git submodule update --remote bs_deb_packager"
     Rake::Task["debian:generate_md5sums"].invoke
     sh "sed -i 's/Version: .*/Version: #{BetterServedPrinter::VERSION}/g' bs_deb_packager/DEBIAN/control"
     sh "sed -i 's/0.0.1.gem/#{BetterServedPrinter::VERSION}.gem/g' bs_deb_packager/DEBIAN/preinst"
-    sh "cp -f bin/better_served_printer bs_deb_packager/usr/local/bin"
+    sh "cp -f bin/bsprinter bs_deb_packager/usr/local/bin"
     sh "dpkg -b bs_deb_packager pkg/better-served-printer_#{BetterServedPrinter::VERSION}_all.deb"
   end
 
