@@ -15,7 +15,7 @@ end
 
 
 Daemons.run_proc('bsprinter') do
-  BetterServedPrinter.configure api_key: settings[:api_key], account: settings[:account]
+  BetterServedPrinter.configure api_key: settings['api_key'], account: settings['account']
   printer = BetterServedPrinter::Printer.new
   printer.connect
   loop do
